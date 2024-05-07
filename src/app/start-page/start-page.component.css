@@ -1,0 +1,40 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container h1 {
+  font-size: 22px;
+  font-weight: lighter;
+}
+
+.container p {
+  font-size: 18px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.choice {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.choice a {
+  margin-right: 8px;
+  margin-left: 8px;
+  text-decoration: underline;
+  text-decoration-color: var(--secondary-bg-color);
+  text-underline-offset: 4px;
+  transition-duration: 0.5s;
+  transition-property: opacity;
+}
+
+.choice a:hover {
+  opacity: 80%;
+}
+
+

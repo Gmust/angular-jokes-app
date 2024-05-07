@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+html, body,
+h1, h2, h3, h4, h5, h6, p, a, blockquote, img,
+form, fieldset, legend, label, textarea,
+span, em, strong, sub, sup, cite,
+table, tbody, td, tfoot, th, thead, tr, tt,
+dl, dt, dd, ol, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-font-color);
+}
+
+img {
+  border: 0;
+}
+
+body {
+  font-family: "Poetsen One", sans-serif;
+  font-style: normal;
+  color: var(--main-font-color);
+
+  --main-bg-color: #000000;
+  --secondary-bg-color: #6b0078;
+  --main-font-color: white;
+}
+
+
