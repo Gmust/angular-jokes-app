@@ -1,0 +1,124 @@
+
+h2 {
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+
+.searchBar {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.selectCategory {
+  display: flex;
+  align-items: center;
+}
+
+.selectCategory svg {
+  fill: white;
+}
+
+.radioContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.customCategories {
+  display: flex;
+  align-items: center;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.disabledFields {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  color: gray;
+  opacity: 90%;
+  cursor: not-allowed;
+}
+
+.blackListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.blackList {
+  display: flex;
+}
+
+
+.searchJoke {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.searchJokeInput {
+  width: 100%;
+  font-size: 18px;
+  color: var(--main-font-color);
+  padding: 10px;
+  background: inherit;
+  border: 0px;
+  border-bottom: 1px solid gray;
+  outline: none;
+  transition-duration: 0.5s;
+}
+
+.searchJoke input:focus {
+  border: 0px;
+  border-bottom: 1px solid #007bff;
+}
+
+
+.jokesAmount {
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.jokesAmount input {
+  font-size: 18px;
+  color: var(--main-font-color);
+  padding: 10px;
+  background: inherit;
+  border: 0px;
+  border-bottom: 1px solid gray;
+  outline: none;
+  transition-duration: 0.5s;
+}
+
+.selectsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.searchBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.searchBtnWidth {
+  width:  50%;
+}

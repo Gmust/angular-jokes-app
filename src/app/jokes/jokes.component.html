@@ -1,1 +1,8 @@
-<p>jokes works!</p>
+<section class="container">
+  <app-search-bar></app-search-bar>
+  <div>
+    <p *ngFor="let joke of jokes">
+      {{ joke }}
+    </p>
+  </div>
+</section>

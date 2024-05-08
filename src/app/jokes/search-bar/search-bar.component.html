@@ -1,0 +1,64 @@
+<section>
+  <div class="searchBar">
+    <div class="selectsContainer">
+      <div class="categoriesContainer">
+    <span class="selectCategory">
+      <h2>Select category/categories:</h2>
+    </span>
+        <div class="radioContainer">
+          <div>
+            <input type="radio" value="Any" [(ngModel)]="isCustomCategories" (change)="onRadioChange($event)"
+                   [checked]="!isCustomCategories">
+            <label>Any</label>
+          </div>
+          <div class="customCategories">
+            <div>
+              <input type="radio" value="Custom" [(ngModel)]="isCustomCategories" (change)="onRadioChange($event)">
+              <label>Custom:</label>
+            </div>
+            <ng-container *ngIf="isCustomCategories">
+              <div *ngFor="let category of CustomCategories | keyvalue">
+                <div class="category">
+                  <input type="checkbox" [value]="category.key"
+                         (change)="addToSelectedCategories($event)">
+                  <label>{{ category.value }}</label>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!isCustomCategories">
+              <div *ngFor="let category of CustomCategories | keyvalue">
+                <div class="disabledFields">
+                  <input type="checkbox" [value]="category.key" disabled>
+                  <label>{{ category.value }}</label>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="blackListContainer">
+        <h2>Select blacklisted jokes: (optional)</h2>
+        <div class="blackList">
+          <div *ngFor="let category of BlackListCategories | keyvalue">
+            <div class="category">
+              <input type="checkbox" [value]="category.key"
+                     (change)="addToBlacklistedCategories($event)">
+              <label>{{ category.value }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="searchJoke">
+      <input [(ngModel)]="term" placeholder="Search for joke term..." class="searchJokeInput">
+      <div class="jokesAmount">
+        <label for="jokesAmount">Enter amount of jokes:</label>
+        <input id="jokesAmount" [(ngModel)]="jokesAmount" type="number">
+      </div>
+    </div>
+  </div>
+  <div class="searchBtn">
+    <app-button [classes]="['searchBtnWidth']"  [variant]="ButtonVariant.Primary" buttonName="Search"
+                class="searchBtn"></app-button>
+  </div>
+</section>

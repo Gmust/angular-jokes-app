@@ -1,1 +1,1 @@
-<button [ngClass]="[mainStyle, variant]">{{ buttonName }}</button>
+<button class="btn" [class]="variant" [ngClass]="classes.join(' ')" (click)="handleClick($event)">{{ buttonName }}</button>
