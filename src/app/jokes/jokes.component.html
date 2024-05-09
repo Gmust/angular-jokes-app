@@ -1,8 +1,15 @@
 <section class="container">
   <app-search-bar></app-search-bar>
   <div>
-    <p *ngFor="let joke of jokes">
-      {{ joke }}
-    </p>
+    <ng-container *ngIf="joke">
+      <div>
+        <app-joke [joke]="joke"></app-joke>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="jokes">
+      <div *ngFor="let joke of jokes">
+        <app-joke [joke]="joke"></app-joke>
+      </div>
+    </ng-container>
   </div>
 </section>

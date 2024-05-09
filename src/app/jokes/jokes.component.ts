@@ -1,25 +1,37 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchBarComponent} from "./search-bar/search-bar.component";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
+import {JokesService} from "./jokes.service";
+import {Joke, JokeRes, JokesRes} from "../../@types/jokes";
+import {JokeComponent} from "./joke/joke.component";
 
 @Component({
   selector: 'app-jokes',
   standalone: true,
-  imports: [SearchBarComponent, HttpClientModule, NgForOf],
+  imports: [SearchBarComponent, HttpClientModule, NgForOf, NgIf, JokeComponent],
   templateUrl: './jokes.component.html',
   styleUrl: './jokes.component.css'
 })
 export class JokesComponent implements OnInit {
 
-  jokes: [] = [];
+  jokes: Joke[] = [];
+  joke: JokeRes | null = null;
 
-  constructor(private http: HttpClient) {
+  constructor(private jokesService: JokesService) {
   }
 
   ngOnInit() {
-    // @ts-ignore
-    this.http.get('https://v2.jokeapi.dev/joke/Any').subscribe({next:(data:any)=> this.jokes.push(data.setup)})
+    this.jokesService.getJokes('/Any?amount=2').subscribe({
+      next: (data: JokesRes | JokeRes) => {
+        if ("jokes" in data && data.jokes) {
+          this.jokes = data.jokes;
+        }
+        if ("joke" in data && data.joke) {
+          this.joke = data;
+        }
+      }
+    });
   }
 
 }
