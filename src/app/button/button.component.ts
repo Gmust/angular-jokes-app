@@ -25,12 +25,21 @@ export class ButtonComponent implements OnInit {
   @Input() variant: ButtonVariant = ButtonVariant.Primary;
   @Input() classes: string[] = [];
   @Input() clickHandler: Function | null = null;
-  @Output() buttonClick: EventEmitter<any> = new EventEmitter();
+  @Input() keyUpHandler: Function | null = null;
+  @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onKeyUpEnter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  handleOnKeyUpEnter(event: any) {
+    if (this.keyUpHandler) {
+      this.keyUpHandler(event);
+    }
+    this.onKeyUpEnter.emit(event);
   }
 
   handleClick(event: any) {

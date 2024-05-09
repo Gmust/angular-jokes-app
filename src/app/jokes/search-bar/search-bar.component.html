@@ -59,6 +59,6 @@
   </div>
   <div class="searchBtn">
     <app-button [classes]="['searchBtnWidth']"  [variant]="ButtonVariant.Primary" buttonName="Search"
-                class="searchBtn"></app-button>
+                class="searchBtn" (keyup.enter)="handleSearch()" (buttonClick)="handleSearch()"></app-button>
   </div>
 </section>

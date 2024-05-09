@@ -18,8 +18,11 @@ import {ButtonComponent, ButtonVariant} from "../../button/button.component";
   styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent {
+
   protected readonly CustomCategories = CustomCategories;
   protected readonly BlackListCategories = BlackListCategories
+  protected readonly ButtonVariant = ButtonVariant;
+
   selectedCategories: string[] = [];
   selectedBlacklistedCategories: string[] = [];
   isCustomCategories: boolean = false;
@@ -41,5 +44,30 @@ export class SearchBarComponent {
     this.selectedBlacklistedCategories.push(value);
   }
 
-  protected readonly ButtonVariant = ButtonVariant;
+  handleSearch() {
+    console.log(this.generateQueryString());
+  }
+
+  generateQueryString() {
+    let queryString: string = '';
+    if (this.isCustomCategories) {
+      queryString += this.selectedCategories.join(',') + '?';
+    } else {
+      queryString += '/Any?';
+    }
+    if (this.selectedBlacklistedCategories.length > 0) {
+      queryString += 'blacklistFlags=' + this.selectedBlacklistedCategories.join(',') + '&';
+    }
+    if (this.term) {
+      queryString += 'contains=' + this.term + '&';
+    }
+    if (this.jokesAmount > 1) {
+      queryString += 'amount=' + this.jokesAmount + '&';
+    }
+    if (queryString.endsWith('&')) {
+      queryString = queryString.slice(0, -1);
+    }
+    return queryString;
+  }
+
 }
