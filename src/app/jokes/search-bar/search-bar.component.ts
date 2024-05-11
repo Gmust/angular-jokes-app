@@ -29,6 +29,8 @@ export class SearchBarComponent {
   term: string = '';
   jokesAmount: number = 1;
 
+  @Output() newQuery: EventEmitter<string> = new EventEmitter<string>();
+
   onRadioChange(e: Event) {
     const value = (e.target as HTMLInputElement).value;
     return this.isCustomCategories = value !== 'Any';
@@ -45,7 +47,7 @@ export class SearchBarComponent {
   }
 
   handleSearch() {
-    console.log(this.generateQueryString());
+    this.newQuery.emit(this.generateQueryString())
   }
 
   generateQueryString() {

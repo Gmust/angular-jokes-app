@@ -21,8 +21,21 @@ export class JokesComponent implements OnInit {
   constructor(private jokesService: JokesService) {
   }
 
+  searchNewJokes(newQuery: string) {
+    this.jokesService.getJokes(newQuery).subscribe({
+      next: (data: JokesRes | JokeRes) => {
+        if ("jokes" in data && data.jokes) {
+          this.jokes = data.jokes;
+        }
+        if ("joke" in data && data.joke) {
+          this.joke = data;
+        }
+      }
+    });
+  }
+
   ngOnInit() {
-    this.jokesService.getJokes('/Any?amount=2').subscribe({
+    this.jokesService.getJokes('/Any?amount=4').subscribe({
       next: (data: JokesRes | JokeRes) => {
         if ("jokes" in data && data.jokes) {
           this.jokes = data.jokes;

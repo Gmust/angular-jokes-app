@@ -1,6 +1,6 @@
 <section class="container">
-  <app-search-bar></app-search-bar>
-  <div>
+  <app-search-bar (newQuery)="searchNewJokes($event)"></app-search-bar>
+  <div class="jokes-container">
     <ng-container *ngIf="joke">
       <div>
         <app-joke [joke]="joke"></app-joke>
