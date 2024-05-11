@@ -1,0 +1,10 @@
+<div class="joke-container">
+  <ng-container *ngIf="joke?.joke">
+    <p><strong>Joke:</strong> {{ joke?.joke }}</p>
+  </ng-container>
+  <ng-container *ngIf="joke?.setup">
+    <p><strong>Setup:</strong> {{ joke?.setup }}</p>
+    <p [ngStyle]="{'margin-top': '3px'}"><strong>Delivery:</strong> {{ joke?.delivery }}</p>
+  </ng-container>
+</div>
+
