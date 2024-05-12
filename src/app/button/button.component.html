@@ -1,4 +1,4 @@
 <button class="btn" [class]="variant" [ngClass]="classes.join(' ')" (click)="handleClick($event)"
-        (keyup.enter)="handleOnKeyUpEnter($event)">
+        (keyup.enter)="handleOnKeyUpEnter($event)" [disabled]="disabled">
   {{ buttonName }}
 </button>

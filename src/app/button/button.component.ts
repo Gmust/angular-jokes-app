@@ -28,6 +28,7 @@ export class ButtonComponent implements OnInit {
   @Input() keyUpHandler: Function | null = null;
   @Output() buttonClick: EventEmitter<any> = new EventEmitter<any>();
   @Output() onKeyUpEnter: EventEmitter<any> = new EventEmitter<any>();
+  @Input() disabled!: boolean;
 
   constructor() {
   }

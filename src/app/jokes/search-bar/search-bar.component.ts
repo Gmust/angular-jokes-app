@@ -38,12 +38,20 @@ export class SearchBarComponent {
 
   addToSelectedCategories(e: Event) {
     const value = (e.target as HTMLInputElement).value;
-    this.selectedCategories.push(value);
+    if (this.selectedCategories.find(item => item == value)) {
+      this.selectedCategories = this.selectedCategories.filter(item => item !== value)
+    } else {
+      this.selectedCategories.push(value);
+    }
   }
 
   addToBlacklistedCategories(e: Event) {
     const value = (e.target as HTMLInputElement).value;
-    this.selectedBlacklistedCategories.push(value);
+    if (this.selectedBlacklistedCategories.find(item => item == value)) {
+      this.selectedBlacklistedCategories = this.selectedBlacklistedCategories.filter(item => item !== value)
+    } else {
+      this.selectedBlacklistedCategories.push(value);
+    }
   }
 
   handleSearch() {
@@ -53,7 +61,7 @@ export class SearchBarComponent {
   generateQueryString() {
     let queryString: string = '';
     if (this.isCustomCategories) {
-      queryString += this.selectedCategories.join(',') + '?';
+      queryString += '/' + this.selectedCategories.join(',') + '?';
     } else {
       queryString += '/Any?';
     }
@@ -63,7 +71,7 @@ export class SearchBarComponent {
     if (this.term) {
       queryString += 'contains=' + this.term + '&';
     }
-    if (this.jokesAmount > 1) {
+    if (this.jokesAmount > 0) {
       queryString += 'amount=' + this.jokesAmount + '&';
     }
     if (queryString.endsWith('&')) {

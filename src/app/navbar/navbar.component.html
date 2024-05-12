@@ -10,7 +10,7 @@
       <h2>Logged in</h2>
     </ng-container>
     <ng-container *ngIf="!isAuthenticated()">
-      <a routerLink="/login">
+      <a routerLink="auth/login">
         <app-button buttonName="Login" [variant]="ButtonVariant.Primary"></app-button>
       </a>
     </ng-container>

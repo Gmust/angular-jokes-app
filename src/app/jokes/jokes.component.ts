@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchBarComponent} from "./search-bar/search-bar.component";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
-import {JokesService} from "./jokes.service";
+import {JokesService} from "../services/jokes.service";
 import {Joke, JokeRes, JokesRes} from "../../@types/jokes";
 import {JokeComponent} from "./joke/joke.component";
 
@@ -21,28 +21,30 @@ export class JokesComponent implements OnInit {
   constructor(private jokesService: JokesService) {
   }
 
+  updateJokesArr(data: JokesRes | JokeRes) {
+    if ("jokes" in data && data.jokes) {
+      this.joke = null;
+      this.jokes = data.jokes;
+    }
+    if ("joke" in data && data.joke || 'setup' in data && data.setup) {
+      this.jokes = [];
+      this.joke = data;
+    }
+  }
+
   searchNewJokes(newQuery: string) {
     this.jokesService.getJokes(newQuery).subscribe({
       next: (data: JokesRes | JokeRes) => {
-        if ("jokes" in data && data.jokes) {
-          this.jokes = data.jokes;
-        }
-        if ("joke" in data && data.joke) {
-          this.joke = data;
-        }
+        this.updateJokesArr(data)
       }
     });
   }
 
+
   ngOnInit() {
     this.jokesService.getJokes('/Any?amount=4').subscribe({
       next: (data: JokesRes | JokeRes) => {
-        if ("jokes" in data && data.jokes) {
-          this.jokes = data.jokes;
-        }
-        if ("joke" in data && data.joke) {
-          this.joke = data;
-        }
+        this.updateJokesArr(data)
       }
     });
   }

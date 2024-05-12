@@ -1,0 +1,23 @@
+<div class="login-page">
+  <div class="form">
+    <!--    <form class="register-form">-->
+    <!--      <input type="text" placeholder="name"/>-->
+    <!--      <input type="password" placeholder="password"/>-->
+    <!--      <input type="text" placeholder="email address"/>-->
+    <!--      <button>create</button>-->
+    <!--      <p class="message">Already registered? <a href="#">Sign In</a></p>-->
+    <!--    </form>-->
+    <form (ngSubmit)="submit()" #myForm='ngForm'>
+      <input type="text" placeholder="email" name="email" [(ngModel)]="form.email" #email="ngModel" required
+             id="email"/>
+      <p *ngIf="email.invalid && (email.dirty  || email.touched)" class="error-message">Email must be valid</p>
+      <input type="password" placeholder="password" name="password" [(ngModel)]="form.password" #password="ngModel"
+             required/>
+      <p *ngIf="password.invalid &&  (password.dirty || password.touched)" class="error-message">
+        Password must be valid
+      </p>
+      <app-button [disabled]="myForm.form.invalid" type="submit" [classes]="['submitButton']" [variant]="ButtonVariant.Success">login</app-button>
+      <p class="message">Not registered? <a routerLink="/auth/register">Create an account</a></p>
+    </form>
+  </div>
+</div>

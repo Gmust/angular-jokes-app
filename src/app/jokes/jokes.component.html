@@ -6,7 +6,7 @@
         <app-joke [joke]="joke"></app-joke>
       </div>
     </ng-container>
-    <ng-container *ngIf="jokes">
+    <ng-container *ngIf="jokes.length > 1">
       <div *ngFor="let joke of jokes">
         <app-joke [joke]="joke"></app-joke>
       </div>
