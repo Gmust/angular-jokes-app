@@ -1,1 +1,33 @@
-<p>register works!</p>
+<div class="register-page">
+  <div class="form">
+    <h1 [ngStyle]="{'margin-bottom': '10px'}">Registration</h1>
+    <form class="register-form" #myForm='ngForm'>
+      <input type="email" name="email" id="email" placeholder="test@gmail.com" [(ngModel)]="form.email" required
+             #email='ngModel'/>
+      <p *ngIf="email.invalid && (email.dirty  || email.touched)" class="error-message">Email must be valid</p>
+      <input type="password" name="password" id='password' placeholder="Password" [(ngModel)]="form.password" required
+             #password='ngModel'/>
+      <p *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+        Password must be valid
+      </p>
+      <p *ngIf="isWeakPassword(form.password) && (password.dirty || password.touched)" class="error-message">
+        Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and
+        be at least 8 characters long.
+      </p>
+      <input type="password" name="passwordConfirmation" id="passwordConfirmation" placeholder="Password confirmation"
+             [(ngModel)]="form.passwordConfirmation" required #passwordConfirmation='ngModel'/>
+      <p *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+        Password confirmation must be valid
+      </p>
+      <p *ngIf="password.value !== passwordConfirmation.value" class="error-message">
+        Passwords must match
+      </p>
+      <app-button [disabled]="myForm.form.invalid || isLoading" type="submit" [classes]="['submitButton']"
+                  [variant]="ButtonVariant.Success" (buttonClick)="register()">
+        Register
+      </app-button>
+      <p class="message">Already registered? <a routerLink="/auth/login">Sign In</a></p>
+    </form>
+  </div>
+</div>
+

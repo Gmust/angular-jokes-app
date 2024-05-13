@@ -62,3 +62,18 @@
   background-color: #ffc107;
   color: black; /* Change text color for warning */
 }
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  box-shadow: none;
+  transform: translateY(0px);
+}
+
+button:disabled:active {
+  box-shadow: none;
+  transform: translateY(0px);
+}

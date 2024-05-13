@@ -1,9 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {User} from "../../@types/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  user: User | null = null;
+  isAuth: boolean = !!this.user
+
+  constructor() {
+  }
 }
