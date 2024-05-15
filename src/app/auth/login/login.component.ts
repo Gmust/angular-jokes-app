@@ -8,6 +8,7 @@ import {ToastService} from "../../services/toast.service";
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import firebase from "firebase/compat";
 import FirebaseError = firebase.FirebaseError;
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -23,30 +24,17 @@ import FirebaseError = firebase.FirebaseError;
 })
 export class LoginComponent {
 
-  isLoading: boolean = false;
   protected readonly ButtonVariant = ButtonVariant;
   form: LoginForm = {
     email: '',
     password: ''
   }
 
-  constructor(public toastService: ToastService, private router: Router,) {
+  constructor(public authService: AuthService) {
   }
 
   submit() {
-    this.isLoading = true;
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, this.form.email, this.form.password)
-      .then((userCredentials) => {
-        console.log(userCredentials);
-        this.toastService.add('Successfully logged in!', 4000, 'success')
-      })
-      .catch((err: FirebaseError) => {
-        console.error(err);
-        this.toastService.add(err.message, 4000, "error")
-      })
-      .finally(() => this.isLoading = false)
-
+    this.authService.login(this.form.email, this.form.password)
   }
 
 

@@ -15,7 +15,7 @@ export interface Joke {
     explicit: boolean
   },
   id: number;
-  safe: true;
+  safe: boolean;
   lang: 'en'
 }
 

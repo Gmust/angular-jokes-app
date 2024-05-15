@@ -1,19 +1,23 @@
-<header class='container'>
+<header class="container">
   <nav class="nav-container">
     <a routerLink="/" class="logo-container">
       <img ngSrc="assets/images/android-chrome-512x512.png" alt="logo" height="512" width="512">
     </a>
-    <a routerLink="jokes" class="joke-btn" >
-      <app-button buttonName="Find joke" ></app-button>
+    <a routerLink="jokes" class="joke-btn">
+      <app-button buttonName="Find joke"></app-button>
     </a>
-    <ng-container *ngIf="isAuthenticated()">
+    <ng-container *ngIf="authStatus$ | async; else loggedOut">
       <h2>Logged in</h2>
+      <span *ngIf="currentUser$ | async as user">
+        Welcome, {{ user.email }}!
+      </span>
+      <app-button buttonName="Logout" (click)="logout()" [variant]="ButtonVariant.Primary"></app-button>
     </ng-container>
-    <ng-container *ngIf="!isAuthenticated()">
+    <ng-template #loggedOut>
       <a routerLink="auth/login">
         <app-button buttonName="Login" [variant]="ButtonVariant.Primary"></app-button>
       </a>
-    </ng-container>
+    </ng-template>
   </nav>
   <div class="divider"></div>
 </header>

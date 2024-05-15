@@ -22,7 +22,7 @@
       <p *ngIf="password.value !== passwordConfirmation.value" class="error-message">
         Passwords must match
       </p>
-      <app-button [disabled]="myForm.form.invalid || isLoading" type="submit" [classes]="['submitButton']"
+      <app-button [disabled]="myForm.form.invalid || this.authService.isLoading" type="submit" [classes]="['submitButton']"
                   [variant]="ButtonVariant.Success" (buttonClick)="register()">
         Register
       </app-button>

@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
-import {NgIf, NgOptimizedImage} from "@angular/common";
-import {ButtonComponent, ButtonVariant} from "../button/button.component";
+import {RouterLink} from '@angular/router';
+import {AsyncPipe, NgIf, NgOptimizedImage} from '@angular/common';
+import {ButtonComponent, ButtonVariant} from '../button/button.component';
+import {select, Store} from '@ngrx/store';
+import {selectAuthStatus, selectCurrentUser} from "../state/user.selector";
+import {UserActions} from '../state/user.actions'
 
 @Component({
   selector: 'app-navbar',
@@ -10,23 +13,26 @@ import {ButtonComponent, ButtonVariant} from "../button/button.component";
     RouterLink,
     NgIf,
     ButtonComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    AsyncPipe
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isAuth: boolean = false;
+  protected readonly ButtonVariant = ButtonVariant;
+  currentUser$ = this.store.pipe(select(selectCurrentUser));
+  authStatus$ = this.store.pipe(select(selectAuthStatus));
 
-  constructor() {
+  constructor(private store: Store) {
   }
 
   ngOnInit() {
+    this.authStatus$.subscribe(status => console.log('Auth Status:', status));
   }
 
-  isAuthenticated() {
-    return false
+  logout() {
+    localStorage.removeItem('token');
+    this.store.dispatch(UserActions.removeUser());
   }
-
-  protected readonly ButtonVariant = ButtonVariant;
 }

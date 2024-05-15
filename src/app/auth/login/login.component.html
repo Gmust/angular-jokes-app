@@ -9,7 +9,7 @@
       <p *ngIf="password.invalid &&  (password.dirty || password.touched)" class="error-message">
         Password must be valid
       </p>
-      <app-button [disabled]="myForm.form.invalid || isLoading" type="submit" [classes]="['submitButton']" [variant]="ButtonVariant.Success">login</app-button>
+      <app-button [disabled]="myForm.form.invalid || this.authService.isLoading" type="submit" [classes]="['submitButton']" [variant]="ButtonVariant.Success">login</app-button>
       <p class="message">Not registered? <a routerLink="/auth/register">Create an account</a></p>
     </form>
   </div>

@@ -9,6 +9,7 @@ import firebase from "firebase/compat";
 import FirebaseError = firebase.FirebaseError;
 import {ToastService} from "../../services/toast.service";
 import {ToastComponent} from "../../toast/toast.component";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,6 @@ import {ToastComponent} from "../../toast/toast.component";
 export class RegisterComponent {
 
   protected readonly ButtonVariant = ButtonVariant
-  isLoading: boolean = false;
   strongPasswordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/;
   form: RegisterForm = {
     email: '',
@@ -28,7 +28,7 @@ export class RegisterComponent {
     passwordConfirmation: ''
   }
 
-  constructor(private router: Router, public toastService: ToastService) {
+  constructor(public authService: AuthService) {
   }
 
   isWeakPassword(password: string): boolean {
@@ -36,17 +36,7 @@ export class RegisterComponent {
   }
 
   register() {
-    this.isLoading = true;
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, this.form.email, this.form.password)
-      .then(() => {
-        this.toastService.add('Successfully created account!', 4000, 'success')
-        this.router.navigate(["/auth/login"])
-      })
-      .catch((err: FirebaseError) => {
-        this.toastService.add(err.message, 4000, 'error')
-      })
-      .finally(() => this.isLoading = false)
+    this.authService.register(this.form.email, this.form.password);
   }
 
 }
