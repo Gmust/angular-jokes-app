@@ -7,11 +7,12 @@
       <app-button buttonName="Find joke"></app-button>
     </a>
     <ng-container *ngIf="authStatus$ | async; else loggedOut">
-      <h2>Logged in</h2>
-      <span *ngIf="currentUser$ | async as user">
-        Welcome, {{ user.email }}!
-      </span>
-      <app-button buttonName="Logout" (click)="logout()" [variant]="ButtonVariant.Primary"></app-button>
+      <div class="logout-container">
+        <span *ngIf="currentUser$ | async as user" routerLink="/user-account">
+          Welcome, {{ user.email }}!
+        </span>
+        <app-button buttonName="Logout" (click)="logout()" [variant]="ButtonVariant.Primary"></app-button>
+      </div>
     </ng-container>
     <ng-template #loggedOut>
       <a routerLink="auth/login">

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ButtonComponent, ButtonVariant} from "../../button/button.component";
 import {Router, RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
@@ -9,6 +9,8 @@ import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import firebase from "firebase/compat";
 import FirebaseError = firebase.FirebaseError;
 import {AuthService} from "../../services/auth.service";
+import {select, Store} from "@ngrx/store";
+import {selectCurrentUser} from "../../state/user.selector";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,7 @@ import {AuthService} from "../../services/auth.service";
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   protected readonly ButtonVariant = ButtonVariant;
   form: LoginForm = {
@@ -30,12 +32,15 @@ export class LoginComponent {
     password: ''
   }
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private store: Store, public router: Router) {
   }
 
   submit() {
     this.authService.login(this.form.email, this.form.password)
   }
 
+  ngOnInit() {
+    if (this.store.pipe(select(selectCurrentUser))) this.router.navigate(['/jokes'])
+  }
 
 }

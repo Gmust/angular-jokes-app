@@ -23,7 +23,8 @@ export const userReducer = createReducer(
 
   on(UserActions.removeUser, state => ({
     ...state,
-    user: null
+    user: null,
+    isAuthenticated: false
   })),
 
   on(UserActions.setIsAuth, (state, {isAuth}) => ({

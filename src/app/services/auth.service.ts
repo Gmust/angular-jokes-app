@@ -27,6 +27,7 @@ export class AuthService {
         this.store.dispatch(UserActions.setUser({ user: userCredentials.user }));
         localStorage.setItem('user', JSON.stringify(userCredentials.user));
         this.toastService.add('Successfully logged in!', 4000, 'success')
+        this.router.navigate(['/jokes'])
       })
       .catch((err: FirebaseError) => {
         console.error(err);

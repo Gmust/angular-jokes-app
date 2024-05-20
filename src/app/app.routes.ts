@@ -3,6 +3,7 @@ import {StartPageComponent} from "./start-page/start-page.component";
 import {JokesComponent} from "./jokes/jokes.component";
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
+import {UserAccountComponent} from "./user-account/user-account.component";
 
 const routeConfig: Routes = [
   {
@@ -25,6 +26,11 @@ const routeConfig: Routes = [
     component: RegisterComponent,
     title: 'Registration'
   },
+  {
+    path: 'user-account',
+    component: UserAccountComponent,
+    title: 'User account'
+  }
 ];
 
 export default routeConfig;
