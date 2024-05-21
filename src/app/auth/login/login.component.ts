@@ -11,6 +11,7 @@ import FirebaseError = firebase.FirebaseError;
 import {AuthService} from "../../services/auth.service";
 import {select, Store} from "@ngrx/store";
 import {selectCurrentUser} from "../../state/user.selector";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ import {selectCurrentUser} from "../../state/user.selector";
 export class LoginComponent implements OnInit {
 
   protected readonly ButtonVariant = ButtonVariant;
+  currentUser$ = this.store.pipe(select(selectCurrentUser));
   form: LoginForm = {
     email: '',
     password: ''
@@ -40,7 +42,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.store.pipe(select(selectCurrentUser))) this.router.navigate(['/jokes'])
+    this.currentUser$
+      .pipe(
+        filter(user => !!user)
+      )
+      .subscribe(user => {
+        this.router.navigate(['/jokes']);
+      });
   }
 
 }

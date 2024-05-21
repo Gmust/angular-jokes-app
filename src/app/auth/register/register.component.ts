@@ -12,6 +12,7 @@ import {ToastComponent} from "../../toast/toast.component";
 import {AuthService} from "../../services/auth.service";
 import {select, Store} from "@ngrx/store";
 import {selectCurrentUser} from "../../state/user.selector";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
   protected readonly ButtonVariant = ButtonVariant
   strongPasswordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/;
+  currentUser$ = this.store.pipe(select(selectCurrentUser));
   form: RegisterForm = {
     email: '',
     password: '',
@@ -42,7 +44,13 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.store.pipe(select(selectCurrentUser))) this.router.navigate(['/jokes'])
+    this.currentUser$
+      .pipe(
+        filter(user => !!user)
+      )
+      .subscribe(user => {
+        this.router.navigate(['/jokes']);
+      });
   }
 
 }
