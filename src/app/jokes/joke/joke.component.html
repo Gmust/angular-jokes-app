@@ -1,10 +1,33 @@
-<div class="joke-container">
-  <ng-container *ngIf="joke?.joke">
-    <p><strong>Joke:</strong> {{ joke?.joke }}</p>
-  </ng-container>
-  <ng-container *ngIf="joke?.setup">
-    <p><strong>Setup:</strong> {{ joke?.setup }}</p>
-    <p [ngStyle]="{'margin-top': '3px'}"><strong>Delivery:</strong> {{ joke?.delivery }}</p>
+<div class="container">
+  <div class="joke-container">
+    <ng-container *ngIf="joke?.joke">
+      <p><strong>Joke:</strong> {{ joke?.joke }}</p>
+    </ng-container>
+    <ng-container *ngIf="joke?.setup">
+      <p><strong>Setup:</strong> {{ joke?.setup }}</p>
+      <p [ngStyle]="{'margin-top': '3px'}"><strong>Delivery:</strong> {{ joke?.delivery }}</p>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="currentUser$ | async as user">
+    <ng-container *ngIf="user.favoritesList && user.favoritesList.length > 0; else noJokes">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           class="lucide lucide-folder-heart">
+        <path
+          d="M11 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v1.5"/>
+        <path
+          d="M13.9 17.45c-1.2-1.2-1.14-2.8-.2-3.73a2.43 2.43 0 0 1 3.44 0l.36.34.34-.34a2.43 2.43 0 0 1 3.45-.01v0c.95.95 1 2.53-.2 3.74L17.5 21Z"/>
+      </svg>
+    </ng-container>
+    <ng-template #noJokes>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           class="lucide lucide-folder-plus" (click)="addJokeToFavorites(user, joke!)">
+        <path d="M12 10v6"/>
+        <path d="M9 13h6"/>
+        <path
+          d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>
+      </svg>
+    </ng-template>
   </ng-container>
 </div>
-

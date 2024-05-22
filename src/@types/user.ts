@@ -2,7 +2,7 @@ import {Joke} from "./jokes";
 
 
 export interface User {
-  uuid: number,
+  uid: string,
   email: string,
   favoritesList: Joke[]
 }

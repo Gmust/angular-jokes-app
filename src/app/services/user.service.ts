@@ -27,7 +27,7 @@ export class UserService {
     }
   }
 
-  async addJokeToCollection(collectionName: string, jokeData: Joke) {
+  async addJokeToUserCollection(collectionName: string, jokeData: Joke) {
     try {
       const colRef = collection(this.db, collectionName);
       await addDoc(colRef, jokeData);

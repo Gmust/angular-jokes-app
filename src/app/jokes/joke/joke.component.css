@@ -1,7 +1,18 @@
 
-.joke-container {
+.container {
   border: 1px solid gray;
   border-radius: 16px;
   padding: 15px;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.joke-container {
+  margin-right: 10px;
+}
+
+
+.container svg {
+  cursor: pointer;
 }
